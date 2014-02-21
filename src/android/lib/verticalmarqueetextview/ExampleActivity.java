@@ -1,4 +1,5 @@
 package android.lib.verticalmarqueetextview;
+
 import android.app.Activity;
 import android.os.Bundle;
 
