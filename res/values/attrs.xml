@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalMarqueeTextView">
+        <attr
+            name="autoStartMarquee"
+            format="boolean" />
+        <attr
+            name="marqueeSpeed"
+            format="reference|integer" />
+        <attr
+            name="text"
+            format="reference|string" />
+        <attr
+            name="textSize"
+            format="reference|dimension" />
+        <attr
+            name="textColor"
+            format="reference|color" />
+        <attr
+            name="textAppearance"
+            format="reference" />
+        <attr name="textStyle">
+            <enum
+                name="normal"
+                value="0" />
+            <enum
+                name="bold"
+                value="1" />
+            <enum
+                name="italic"
+                value="2" />
+        </attr>
+        <attr name="typeface">
+            <enum
+                name="normal"
+                value="0" />
+            <enum
+                name="sans"
+                value="1" />
+            <enum
+                name="serif"
+                value="2" />
+            <enum
+                name="monospace"
+                value="3" />
+        </attr>
+    </declare-styleable>
+</resources>
