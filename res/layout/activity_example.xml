@@ -22,8 +22,14 @@
         example:textColor="@android:color/white"
         example:textStyle="bold"
         example:text="The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog." />
-    <View
+    <android.lib.verticalmarqueetextview.VerticalMarqueeTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        example:marqueeSpeed="25"
+        example:textSize="20dp"
+        example:textColor="@android:color/white"
+        example:textStyle="bold"
+        example:text="The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog." />
 </LinearLayout>
