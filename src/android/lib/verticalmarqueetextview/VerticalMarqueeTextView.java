@@ -211,7 +211,7 @@ public final class VerticalMarqueeTextView extends ScrollView {
         }
     }
 
-    private static final class MarqueeRunnable implements Runnable {
+    private final class MarqueeRunnable implements Runnable {
         private final ViewGroup parent;
         private final TextView  textView;
 
@@ -227,7 +227,7 @@ public final class VerticalMarqueeTextView extends ScrollView {
 
         @Override
         public void run() {
-            final int height       = MarqueeRunnable.heightOf(this.textView);
+            final int height       = this.heightOf(this.textView);
             final int parentHeight = this.parent.getHeight();
 
             if (height > 0 && parentHeight > 0 && height > parentHeight) {
@@ -247,7 +247,7 @@ public final class VerticalMarqueeTextView extends ScrollView {
          * @param textView The {@link TextView} to determine the height of all its text content.
          * @return The standard height of all the text content of the given {@link TextView}.
          */
-        private static int heightOf(final TextView textView) {
+        private int heightOf(final TextView textView) {
             return textView.getLineCount() > 0 ? textView.getLineHeight() * textView.getLineCount() : 0;
         }
     }
