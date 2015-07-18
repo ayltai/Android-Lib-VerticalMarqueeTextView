@@ -1,6 +1,8 @@
 Vertical Marquee TextView for Android
 =====================================
 
+[ ![Download](https://api.bintray.com/packages/ayltai/maven/Android-Lib-VerticalMarqueeTextView/images/download.svg) ](https://bintray.com/ayltai/maven/Android-Lib-VerticalMarqueeTextView/_latestVersion)
+
 A custom TextView with vertical marquee effect.
 
 <img src="https://raw.github.com/ayltai/Android-Lib-VerticalMarqueeTextView/master/screenshots/device-2014-02-22-000150.png" width="240" height="400" alt="Screenshot-1" />&nbsp;
@@ -13,6 +15,19 @@ Features
 * Automatically start marquee effect when the TextView is added to a view.
 * Customizable marquee speed
 * Easy to extend and customize
+
+Installation
+------------
+
+<pre>
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'android.lib.verticalmarqueetextview:VerticalMarqueeTextView:+'
+}
+</pre>
 
 How to use
 ----------
