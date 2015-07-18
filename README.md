@@ -32,7 +32,7 @@ dependencies {
 How to use
 ----------
 
-This project includes an [activity_example.xml](https://github.com/ayltai/Android-Lib-VerticalMarqueeTextView/blob/master/res/layout/activity_example.xml) to show how to use this library using XML declaration. An [ExampleActivity](https://github.com/ayltai/Android-Lib-VerticalMarqueeTextView/blob/master/src/android/lib/verticalmarqueetextview/ExampleActivity.java) is also included, which, however, is basically empty because you don't need to write any code!
+This project includes an [activity_example.xml](https://github.com/ayltai/Android-Lib-VerticalMarqueeTextView/blob/master/Samples/src/main/res/layout/activity_example.xml) to show how to use this library using XML declaration. An [ExampleActivity](https://github.com/ayltai/Android-Lib-VerticalMarqueeTextView/blob/master/Samples/src/main/java/android/lib/widget/verticalmarqueetextview/ExampleActivity.java) is also included, which, however, is basically empty because you don't need to write any code!
 
 Here is the example layout that generates the above screenshots:
 
