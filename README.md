@@ -50,7 +50,7 @@ Here is the example layout that generates the above screenshots:
             android:layout_gravity="center_horizontal"
             android:scaleType="centerInside"
             android:src="@android:drawable/sym_def_app_icon" />
-        <android.lib.verticalmarqueetextview.VerticalMarqueeTextView
+        <android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
