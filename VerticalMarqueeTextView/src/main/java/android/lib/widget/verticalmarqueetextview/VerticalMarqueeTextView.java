@@ -204,11 +204,11 @@
 
 package android.lib.widget.verticalmarqueetextview;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -220,18 +220,22 @@ import android.widget.TextView;
  * A {@link TextView} with vertical marquee effect. The animation speed can be set using
  * {@link #setMarqueeSpeed(int)} or through XML declaration. By default, the marquee effect
  * animation starts automatically when this view is attached to a {@link Window}.
- * Set <code>autoStartMarquee</code> to <code>false</code> to disable this behavior.
+ * Set {@code autoStartMarquee} to {@code false} to disable this behavior.
  */
-public final class VerticalMarqueeTextView extends ScrollView {
+public class VerticalMarqueeTextView extends ScrollView {
     private static final int MIN_MARQUEE_SPEED = 1;
     private static final int MAX_MARQUEE_SPEED = 1000;
+
+    private Handler handler;
 
     private TextView textView;
 
     private int     marqueeSpeed;
-    private boolean autoStartMarquee;
     private boolean marqueeStarted;
     private boolean marqueePaused;
+    private boolean isAnimating;
+
+    private int unitDisplacement;
 
     public VerticalMarqueeTextView(final Context context) {
         super(context);
@@ -290,7 +294,16 @@ public final class VerticalMarqueeTextView extends ScrollView {
         this.marqueeStarted = true;
         this.marqueePaused  = false;
 
-        new MarqueeAsyncTask().execute(this.textView);
+        if (!isAnimating) {
+            isAnimating = true;
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    VerticalMarqueeTextView.this.animateTextView();
+                }
+            }).start();
+        }
     }
 
     /**
@@ -333,6 +346,11 @@ public final class VerticalMarqueeTextView extends ScrollView {
     }
 
     private void init(final Context context, final AttributeSet attrs) {
+        this.handler = new Handler(Looper.getMainLooper());
+
+        // 1dp per cycle
+        this.unitDisplacement = Math.round(this.getResources().getDisplayMetrics().density);
+
         this.textView = new TextView(context);
         this.textView.setGravity(Gravity.CENTER);
         this.addView(this.textView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -386,9 +404,9 @@ public final class VerticalMarqueeTextView extends ScrollView {
                 this.setMarqueeSpeed(context.getResources().getInteger(marqueeSpeedRes));
             }
 
-            this.autoStartMarquee = array.getBoolean(R.styleable.VerticalMarqueeTextView_autoStartMarquee, true);
+            final boolean autoStartMarquee = array.getBoolean(R.styleable.VerticalMarqueeTextView_autoStartMarquee, true);
 
-            if (this.autoStartMarquee) {
+            if (autoStartMarquee) {
                 this.marqueeStarted = true;
             }
 
@@ -396,23 +414,22 @@ public final class VerticalMarqueeTextView extends ScrollView {
         }
     }
 
-    private final class MarqueeAsyncTask extends AsyncTask<TextView, Void, Void> {
-        @Override
-        protected Void doInBackground(final TextView... params) {
-            final Activity activity = (Activity)params[0].getContext();
-            final Runnable runnable = new MarqueeRunnable((ViewGroup)params[0].getParent(), params[0]);
+    private void animateTextView() {
+        final Runnable runnable = new VerticalMarqueeTextView.MarqueeRunnable(this.textView);
 
-            while (VerticalMarqueeTextView.this.marqueeStarted && !VerticalMarqueeTextView.this.marqueePaused) {
-                activity.runOnUiThread(runnable);
+        long previousMillis = 0;
 
-                try {
-                    Thread.sleep((long)(1000d / VerticalMarqueeTextView.this.marqueeSpeed));
-                } catch (final InterruptedException e) {
-                }
+        while (VerticalMarqueeTextView.this.marqueeStarted && !VerticalMarqueeTextView.this.marqueePaused) {
+            final long currentMillis = System.currentTimeMillis();
+
+            if (currentMillis >= previousMillis) {
+                VerticalMarqueeTextView.this.handler.post(runnable);
+
+                previousMillis = currentMillis + (long)(1000d / VerticalMarqueeTextView.this.marqueeSpeed);
             }
-
-            return null;
         }
+
+        this.isAnimating = false;
     }
 
     private final class MarqueeRunnable implements Runnable {
@@ -420,12 +437,11 @@ public final class VerticalMarqueeTextView extends ScrollView {
         private final TextView  textView;
 
         /**
-         * Creates a new instance of {@link MarqueeRunnable}.
-         * @param parent The parent container that hosts the specific {@link TextView}.
+         * Creates a new instance of {@link VerticalMarqueeTextView.MarqueeRunnable}.
          * @param textView The {@link TextView} to apply marquee effect.
          */
-        public MarqueeRunnable(final ViewGroup parent, final TextView textView) {
-            this.parent   = parent;
+        public MarqueeRunnable(final TextView textView) {
+            this.parent   = (ViewGroup)textView.getParent();
             this.textView = textView;
         }
 
@@ -438,7 +454,7 @@ public final class VerticalMarqueeTextView extends ScrollView {
                 if (this.textView.getScrollY() >= height) {
                     this.textView.scrollTo(0, -parentHeight);
                 } else {
-                    this.textView.scrollBy(0, 1);
+                    this.textView.scrollBy(0, VerticalMarqueeTextView.this.unitDisplacement);
                 }
 
                 this.textView.invalidate();

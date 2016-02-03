@@ -12,23 +12,25 @@
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
         android:src="@android:drawable/sym_def_app_icon" />
-    <android.lib.verticalmarqueetextview.VerticalMarqueeTextView
+    <android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
+        android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
-        example:marqueeSpeed="25"
-        example:textSize="20dp"
+        example:marqueeSpeed="50"
+        example:textSize="20sp"
         example:textColor="@android:color/white"
         example:textStyle="bold"
         example:text="The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog." />
-    <android.lib.verticalmarqueetextview.VerticalMarqueeTextView
+    <android.lib.widget.verticalmarqueetextview.VerticalMarqueeTextView
+        android:id="@+id/text2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         example:marqueeSpeed="25"
-        example:textSize="20dp"
+        example:textSize="20sp"
         example:textColor="@android:color/white"
         example:textStyle="bold"
         example:text="The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog." />
