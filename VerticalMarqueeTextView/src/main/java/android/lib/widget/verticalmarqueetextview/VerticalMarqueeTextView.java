@@ -210,6 +210,7 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -223,8 +224,12 @@ import android.widget.TextView;
  * Set {@code autoStartMarquee} to {@code false} to disable this behavior.
  */
 public class VerticalMarqueeTextView extends ScrollView {
+    private static final String TAG = VerticalMarqueeTextView.class.getName();
+
     private static final int MIN_MARQUEE_SPEED = 1;
     private static final int MAX_MARQUEE_SPEED = 1000;
+
+    private static final double SECOND = 1000;
 
     private Handler handler;
 
@@ -294,8 +299,8 @@ public class VerticalMarqueeTextView extends ScrollView {
         this.marqueeStarted = true;
         this.marqueePaused  = false;
 
-        if (!isAnimating) {
-            isAnimating = true;
+        if (!this.isAnimating) {
+            this.isAnimating = true;
 
             new Thread(new Runnable() {
                 @Override
@@ -425,7 +430,13 @@ public class VerticalMarqueeTextView extends ScrollView {
             if (currentMillis >= previousMillis) {
                 VerticalMarqueeTextView.this.handler.post(runnable);
 
-                previousMillis = currentMillis + (long)(1000d / VerticalMarqueeTextView.this.marqueeSpeed);
+                previousMillis = currentMillis + (long)(VerticalMarqueeTextView.SECOND / VerticalMarqueeTextView.this.marqueeSpeed);
+            }
+
+            try {
+                Thread.sleep((long)(VerticalMarqueeTextView.SECOND / VerticalMarqueeTextView.this.marqueeSpeed));
+            } catch (final InterruptedException e) {
+                Log.v(VerticalMarqueeTextView.TAG, e.getMessage(), e);
             }
         }
 

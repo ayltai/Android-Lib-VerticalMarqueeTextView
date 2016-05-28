@@ -1,7 +1,7 @@
 Vertical Marquee TextView for Android
 =====================================
 
-[ ![Download](https://api.bintray.com/packages/ayltai/maven/Android-Lib-VerticalMarqueeTextView/images/download.svg) ](https://bintray.com/ayltai/maven/Android-Lib-VerticalMarqueeTextView/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/ayltai/maven/Android-Lib-VerticalMarqueeTextView/images/download.svg) ](https://bintray.com/ayltai/maven/Android-Lib-VerticalMarqueeTextView/_latestVersion) [![Build Status](https://travis-ci.org/ayltai/Android-Lib-VerticalMarqueeTextView.svg?branch=master)](https://travis-ci.org/ayltai/Android-Lib-VerticalMarqueeTextView) [![CircleCI](https://circleci.com/gh/ayltai/Android-Lib-VerticalMarqueeTextView.svg?style=svg)](https://circleci.com/gh/ayltai/Android-Lib-VerticalMarqueeTextView) [![Codeship Status for ayltai/Android-Lib-VerticalMarqueeTextView](https://codeship.com/projects/436878a0-0717-0134-1390-2a7932f3ad25/status?branch=master)](https://codeship.com/projects/154820) [![Build Status](https://www.bitrise.io/app/e51bab8e538dd23c.svg?token=K3Wjw7pJwf1_ROGEK1Z-Lw&branch=master)](https://www.bitrise.io/app/e51bab8e538dd23c) [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5749ba8f789967010062bf57&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5749ba8f789967010062bf57/build/latest)
 
 A custom TextView with vertical marquee effect.
 
