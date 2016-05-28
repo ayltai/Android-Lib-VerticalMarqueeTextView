@@ -14,6 +14,13 @@
             <option value="$PROJECT_DIR$/VerticalMarqueeTextView" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Samples" />
+            <option value="$PROJECT_DIR$/VerticalMarqueeTextView" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
